@@ -9,9 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.util.Arrays;
 
-/**
- * Created by Shubo on 4/14/2015.
- */
+
 @Order(1) // Small number with high priority
 @Component
 @Aspect
@@ -20,7 +18,7 @@ public class ValidationAspect {
     /*
     * Define an empty method for pointcut expression.
     * */
-    @Pointcut("execution(* spring.core.aop.annotation.CalculatorAOP.*(..))")
+    @Pointcut("execution(* spring.core.aop.impl.annotation.CalculatorAop.*(..))")
     public void declareJointPointExpression(){}
 
     @Before("declareJointPointExpression()")

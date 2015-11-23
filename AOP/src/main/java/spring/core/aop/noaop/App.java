@@ -1,7 +1,7 @@
 package spring.core.aop.noaop;
 
 
-public class Main {
+public class App {
     public static void main(String[] args){
          Calculator calculator = null;
          calculator = new CalculatorImpl();

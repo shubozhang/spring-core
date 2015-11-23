@@ -1,8 +1,6 @@
 package spring.core.aop.impl.xml;
 
-/**
- * Created by Shubo on 4/11/2015.
- */
+
 public interface Calculator {
     public int add(int i, int j);
 

@@ -2,9 +2,7 @@ package spring.core.aop.impl.xml;
 
 import org.springframework.stereotype.Component;
 
-/**
- * Created by Shubo on 4/11/2015.
- */
+
 
 public class CalculatorImpl implements Calculator {
     @Override

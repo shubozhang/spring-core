@@ -3,16 +3,14 @@ package spring.core.aop.impl.annotation;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-/**
- * Created by Shubo on 4/12/2015.
- */
-public class App_aop_annotation {
+
+public class App {
 
     public static void main(String[] args){
 
         ApplicationContext ctx = new ClassPathXmlApplicationContext("aop_impl_annotation.xml");
 
-        CalculatorAOP calculator = ctx.getBean(CalculatorAOP.class);
+        CalculatorAop calculator = ctx.getBean(CalculatorAop.class);
 
         int add = calculator.add(3,7);
         System.out.println("add " + add);

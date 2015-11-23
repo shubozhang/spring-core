@@ -3,7 +3,7 @@ package spring.core.aop.proxy;
 /**
  * Created by Shubo on 4/11/2015.
  */
-public class Main {
+public class App {
     public static void main(String[] args) {
         Calculator target = new CalculatorImpl();
         Calculator proxy = new CalculatorProxy(target).getProxy();
