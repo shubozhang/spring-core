@@ -97,6 +97,15 @@
     <bean id="person1" class="spring.core.di.beans.Person" autowire="byName" depends-on="car">
     </bean>
 
+    <!--byType: 根据类型进行自动装配. 但要求 IOC 容器中只有一个类型对应的 bean, 若有多个则无法完成自动装配.-->
+    <!--<bean id="person2" class="spring.core.di.beans.Person" autowire="byType" />-->
+    <bean id="account" class="spring.core.di.beans.Account" autowire="byType">
+        <property name="name" value="John"></property>
+    </bean>
+    <bean id="bank" class="spring.core.di.beans.Bank" >
+        <property name="id" value="101"></property>
+        <property name="bankName" value="Chase"></property>
+    </bean>
 
     <!-- Bean inheritance -->
     <bean id="address2" p:address="Sherman" parent="address"></bean>
@@ -114,13 +123,13 @@
         prototype: 原型的. 每次调用 getBean 方法都会返回一个新的 bean. 且在第一次调用 getBean 方法时才创建实例
         singleton: 单例的. 每次调用 getBean 方法都会返回同一个 bean. 且在 IOC 容器初始化时即创建 bean 的实例. 默认值
     -->
-   <!-- <bean id="carPrototype" class="spring.core.di.beans.Car" scope="prototype">
+    <bean id="carPrototype" class="spring.core.di.beans.Car" scope="prototype">
         <constructor-arg value="KUGA" index="1"></constructor-arg>
         <constructor-arg value="ChangAnFord" index="0"></constructor-arg>
         <constructor-arg value="250000" type="float"></constructor-arg>
     </bean>
 
-    <bean id="source" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <bean id="db_source" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="user" value="root"></property>
         <property name="password" value="1230"></property>
         <property name="driverClass" value="com.mysql.jdbc.Driver"></property>
@@ -129,12 +138,12 @@
 
 
     <context:property-placeholder location="di_db.properties"></context:property-placeholder>
-    <bean id="source2" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+    <bean id="db_properties" class="com.mchange.v2.c3p0.ComboPooledDataSource">
         <property name="user" value="${user}"></property>
         <property name="password" value="${password}"></property>
         <property name="driverClass" value="${driverClass}"></property>
         <property name="jdbcUrl" value="${jdbcUrl}"></property>
-    </bean>-->
+    </bean>
 
     <!-- Using SpEL to assign a value -->
     <bean id="addressEL" class="spring.core.di.beans.Address">
@@ -162,7 +171,17 @@
 
     </bean>
 
-    <!-- id is not required. -->
+    <!-- id is not required. IOC 自动识别PostProcessor -->
+    <!--
+    1. Use constructor or factory method to create bean instance
+    2. Setup bean's properties and its associated bean
+    3. Pass bean instance to postProcessBeforeInitialization method
+    4. Invoke bean's init() method
+    5. Pass bean instance to postProcessAfterInitialization method
+    6. Bean is ready for use.
+    7. When container is closed, invoke bean's destory() method
+
+    -->
     <bean class="spring.core.di.beans.MyBeanPostProcessor"></bean>
 
 
@@ -190,4 +209,10 @@
     </bean>
 
 
+    <!--
+    Use FactoryBean to config bean
+    -->
+    <bean id="carFromFactoryBean" class="spring.core.di.beans.CarFactoryBean">
+        <property name="brand" value="Nissan"/>
+    </bean>
 </beans>

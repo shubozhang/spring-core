@@ -32,9 +32,10 @@ public class Main {
         ex16();
         ex17();
         ex18();
-        ex19();
         ex20();
         ex21();
+        ex22();
+        ex19();
     }
 
     // Not a Spring
@@ -128,8 +129,8 @@ public class Main {
     public static void ex07() {
         System.out.println("start ex07");
 
-        Person p2 = (Person) ctx.getBean("person2");
-        System.out.println(p2);
+        Account account = (Account) ctx.getBean("account");
+        System.out.println(account);
 
         System.out.println("exit ex07");
     }
@@ -170,85 +171,122 @@ public class Main {
     // singleton: 单例的. 每次调用 getBean 方法都会返回同一个 bean. 且在 IOC 容器初始化时即创建 bean 的实例. 默认值
     // prototype: 原型的. 每次调用 getBean 方法都会返回一个新的 bean. 且在第一次调用 getBean 方法时才创建实例
     public static void ex11() {
+        System.out.println("start ex11");
+
         Car car100 = (Car) ctx.getBean("car");
         Car car200 = (Car) ctx.getBean("car");
         System.out.println(car100 == car200);
 
+        System.out.println("exit ex11");
+
     }
 
-    // 12. Bean scope: testing prototype
+    // 12. Bean scope: testing prototype. Bean only be created when getBean is called.
     public static void ex12() {
+        System.out.println("start ex12");
+
         Car car300 = (Car) ctx.getBean("carPrototype");
         Car car400 = (Car) ctx.getBean("carPrototype");
         System.out.println(car300 == car400);
+
+        System.out.println("exit ex12");
     }
 
 
     //13. Testing dataSource
     public static void ex13() {
 
-        ComboPooledDataSource source = (ComboPooledDataSource) ctx.getBean("source");
+        System.out.println("start ex13");
+        ComboPooledDataSource source = (ComboPooledDataSource) ctx.getBean("db_source");
         System.out.println(source.getUser() + " : " + source.getPassword() + " : " + source.getJdbcUrl() + " : " + source.getDriverClass());
 
+        System.out.println("exit ex13");
     }
 
 
 
-    //14. Testing ioc_db.properties
+    //14. Testing di_db.properties
     public static void ex14() {
-        ComboPooledDataSource source2 = (ComboPooledDataSource) ctx.getBean("source2");
+        System.out.println("start ex14");
+
+        ComboPooledDataSource source2 = (ComboPooledDataSource) ctx.getBean("db_properties");
         System.out.println(source2.getUser() + " : " + source2.getPassword() + " : " + source2.getJdbcUrl() + " : " + source2.getDriverClass());
+
+        System.out.println("exit ex14");
     }
 
 
     // 15. SpEL: assign a value
     public static void ex15() {
 
+        System.out.println("start ex15");
         Address addressEL = (Address) ctx.getBean("addressEL");
         System.out.println(addressEL);
+        System.out.println("exit ex15");
     }
 
     //16. SpEL: assign a static property
     public static void ex16() {
 
+        System.out.println("start ex16");
         Car carEL = (Car) ctx.getBean("carEL");
         System.out.println(carEL.toString());
+        System.out.println("exit ex16");
     }
 
 
     //17. SpEl: refer to another bean, bean.field, and operator
     public static void ex17() {
-
-
+        System.out.println("start ex17");
         Person personEL = (Person) ctx.getBean("personEL");
         System.out.println(personEL);
+        System.out.println("exit ex17");
     }
 
     // 18. Testing Bean Cycle
     public static void ex18() {
-
+        System.out.println("start ex18");
 
         Car carBeanCycle = (Car) ctx.getBean("carBeanCycle");
         System.out.println(carBeanCycle);
+
+        System.out.println("exit ex18");
     }
 
     //19. Testing beanPostProcessor
     public static void ex19() {
+        System.out.println("start ex19");
         ctx.close();
+        System.out.println("exit ex19");
     }
 
     // 20. Testing staticFactory
     public static void ex20() {
 
+        System.out.println("start ex20");
         Car carFromStaticFactory = (Car) ctx.getBean("carFromStaticFactory");
         System.out.println(carFromStaticFactory.getBrand() + " : " + carFromStaticFactory.getPrice());
+        System.out.println("exit ex20");
     }
 
     //21. Testing staticFactory
     public static void ex21() {
 
+        System.out.println("start ex21");
         Car carFromInstanceFactory = (Car) ctx.getBean("carFromInstanceFactory");
         System.out.println(carFromInstanceFactory.getBrand() + " : " + carFromInstanceFactory.getPrice());
+
+        System.out.println("exit ex21");
+    }
+
+
+    public static void ex22() {
+        System.out.println("start ex22");
+
+        Car car = (Car)ctx.getBean("carFromFactoryBean");
+        System.out.println(car);
+
+        System.out.println("exit ex22");
     }
 
 }
