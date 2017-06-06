@@ -5,13 +5,15 @@ import org.springframework.stereotype.Component;
 /**
  * Created by uc0006 on 5/28/2015.
  */
-@Component("Test2Object")
-public class Test2Object {
+@Component("Bean2")
+public class Bean2 {
 
     private int x;
-    Test2Object() {
+    Bean2() {
+        System.out.println("Bean2 constructor start---------");
         this.x = 20;
-        System.out.println("Test2Object-------");
+        System.out.println("Bean2-------" + this);
+        System.out.println("Bean2 constructor end");
     }
 
     public int getX() {

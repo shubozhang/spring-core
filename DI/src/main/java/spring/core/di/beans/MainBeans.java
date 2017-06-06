@@ -4,7 +4,7 @@ import com.mchange.v2.c3p0.ComboPooledDataSource;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class Main {
+public class MainBeans {
 
     //Create Spring IOC container object: ApplicationContext is an interface, ClassPathXmlApplicationContext is an implementation class
     private static  ApplicationContext ctx1 = new ClassPathXmlApplicationContext("di-beans.xml");
